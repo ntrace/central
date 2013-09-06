@@ -1,0 +1,13 @@
+{
+  "name": "ntrace-central",
+  "private": true,
+  "version": "0.0.1",
+  "description": "nTrace Central",
+  "main": "index.js",
+  "author": "pgte",
+  "dependencies": {
+    "async": "~0.2.9",
+    "colors": "~0.6.1",
+    "duplex-emitter": "~2.1.2"
+  }
+}
