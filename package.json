@@ -8,6 +8,12 @@
   "dependencies": {
     "async": "~0.2.9",
     "colors": "~0.6.1",
-    "duplex-emitter": "~2.1.2"
+    "duplex-emitter": "~2.1.2",
+    "wsstream": "~0.1.6",
+    "ws": "~0.4.30",
+    "rpc-stream": "~1.0.5",
+    "level": "~0.15.0",
+    "level-sublevel": "~5.1.1",
+    "level-live-stream": "~1.4.7"
   }
 }

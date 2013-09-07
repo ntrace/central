@@ -2,12 +2,38 @@ var assert     = require('assert');
 var net        = require('net');
 var DE         = require('duplex-emitter');
 var liveStream = require('level-live-stream');
+var WSStream   = require('wsstream');
 var db         = require('./db');
 var key        = require('./key');
 
-var server = module.exports = net.createServer(handleConnection);
+
+/// Websocket Server
+
+var wsServer = require('./ws_server');
+
+wsServer.once('listening', function() {
+  console.log('Web Socket Server listening to port %d'.green,
+              wsServer._server.address().port);
+});
+
+wsServer.on('connection', onWsServerConnection);
+
+function onWsServerConnection(socket) {
+  var s = WSStream(socket);
+  s.setEncoding('utf8');
+  handleConnection(s);
+}
+
+
+/// TCP Server
+
+var server   = module.exports = net.createServer(handleConnection);
+
+
+/// Handle Connection
 
 function handleConnection(conn) {
+  console.log('handleConnection');
   var emitter = DE(conn);
 
   emitter.on('follow', follow.bind(emitter));
