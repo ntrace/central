@@ -65,6 +65,7 @@ function followRepo(repo, tail) {
   if (! live) {
     live = liveStream(db.runsSorted, {
       min:  repo + db.sep,
+      max:  repo + db.sep + '\xff',
       tail: tail
     });
     emitter.follows.repo[repo] = live;
@@ -83,6 +84,7 @@ function followRun(run, tail) {
   if (! live) {
     live = liveStream(db.results, {
       min:  run + db.sep,
+      max:  run + db.sep + '\xff',
       tail: tail
     });
     emitter.follows.run[run] = live;
@@ -146,7 +148,7 @@ function streamResult(conn, owner, repo, run) {
 
   var rs = db.results.createValueStream({
     start: key([run, 'result']),
-    end:   key([run, 'result', 9999999999999])
+    end:   key([run, 'result', '\xff'])
   });
 
   rs.on('data', function(d) {
