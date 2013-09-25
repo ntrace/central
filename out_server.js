@@ -33,7 +33,6 @@ var server   = module.exports = net.createServer(handleConnection);
 /// Handle Connection
 
 function handleConnection(conn) {
-  console.log('handleConnection');
   var emitter = DE(conn);
 
   emitter.on('follow', follow.bind(emitter));
